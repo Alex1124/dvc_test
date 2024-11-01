@@ -1,0 +1,35 @@
+schema: '2.0'
+stages:
+  prepare_data:
+    cmd: python src/data/prepare_data.py
+    deps:
+    - path: src/data/prepare_data.py
+      hash: md5
+      md5: 507d488be365d8cf556f8965f8556555
+      size: 937
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 22967f10804372a081c92fa019b1b9d7.dir
+      size: 184380980
+      nfiles: 2
+  train_model:
+    cmd: python src/train/train_model.py
+    deps:
+    - path: data/processed/test.npz
+      hash: md5
+      md5: 8eee107c0204b6899d35ef0b10b556b1
+      size: 30730490
+    - path: data/processed/train.npz
+      hash: md5
+      md5: a894ca1bfe61c387a6e106569eff52cc
+      size: 153650490
+    - path: src/train/train_model.py
+      hash: md5
+      md5: 41b7d4144507ec074b9da0b400b2fe3b
+      size: 1704
+    outs:
+    - path: models/cifar10_model.h5
+      hash: md5
+      md5: 9037bc6dd4b069191e1b7bcdfe0d6b73
+      size: 1523672
