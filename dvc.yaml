@@ -14,3 +14,9 @@ stages:
     - src/data/train_model.py
     outs:
     - models/cifar10_model.h5
+  evaluate_model:
+    cmd: python src/data/evaluate_model.py
+    deps:
+    - data/processed/test.npz
+    - models/cifar10_model.h5
+    - src/data/train_model.py
