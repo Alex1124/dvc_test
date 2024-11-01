@@ -7,16 +7,16 @@ stages:
     - data/processed/test.npz
     - data/processed/train.npz
   train_model:
-    cmd: python src/data/train_model.py
+    cmd: python src/train/train_model.py
     deps:
     - data/processed/test.npz
     - data/processed/train.npz
-    - src/data/train_model.py
+    - src/train/train_model.py
     outs:
     - models/cifar10_model.h5
   evaluate_model:
-    cmd: python src/data/evaluate_model.py
+    cmd: python src/eval/evaluate_model.py
     deps:
     - data/processed/test.npz
     - models/cifar10_model.h5
-    - src/data/train_model.py
+    - src/train/train_model.py
