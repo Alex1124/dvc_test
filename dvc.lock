@@ -29,13 +29,17 @@ stages:
       size: 153650490
     - path: src/train/train_model.py
       hash: md5
-      md5: 890abb6a619280ee4528faf95e02c6c0
-      size: 1899
+      md5: 552b1c85f14b4bb2608066d1be525f28
+      size: 3622
+    params:
+      params.yaml:
+        train.epochs: 21
+        train.lr: 0.001
     outs:
     - path: models/cifar10_model.h5
       hash: md5
-      md5: b8bdef5c58bae67a974418098fa7762b
-      size: 1523672
+      md5: 3107459a6b4eb286c85dec8e8a6a6607
+      size: 1524736
   evaluate_model:
     cmd: python src/eval/evaluate_model.py
     deps:
@@ -45,9 +49,15 @@ stages:
       size: 30730490
     - path: models/cifar10_model.h5
       hash: md5
-      md5: b8bdef5c58bae67a974418098fa7762b
-      size: 1523672
-    - path: src/train/train_model.py
+      md5: 3107459a6b4eb286c85dec8e8a6a6607
+      size: 1524736
+    - path: src/eval/evaluate_model.py
       hash: md5
-      md5: 890abb6a619280ee4528faf95e02c6c0
-      size: 1899
+      md5: 8d26b12bc5855db401e55f723a972867
+      size: 4470
+    outs:
+    - path: dvclive
+      hash: md5
+      md5: bc40b5ba3c81c0df713efbdb8bd9728e.dir
+      size: 659182
+      nfiles: 8
