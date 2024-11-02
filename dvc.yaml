@@ -12,6 +12,9 @@ stages:
     - data/processed/test.npz
     - data/processed/train.npz
     - src/train/train_model.py
+    params:
+    - train.epochs
+    - train.lr
     outs:
     - models/cifar10_model.h5
   evaluate_model:
@@ -19,4 +22,32 @@ stages:
     deps:
     - data/processed/test.npz
     - models/cifar10_model.h5
-    - src/train/train_model.py
+    - src/eval/evaluate_model.py
+    outs:
+    - dvclive
+metrics:
+- dvclive/metrics.json
+plots:
+- dvclive/plots/metrics:
+    x: step
+- dvclive/plots/sklearn/roc/class_0.json:
+    template: simple
+    x: fpr
+    y: tpr
+    title: Receiver operating characteristic (ROC)
+    x_label: False Positive Rate
+    y_label: True Positive Rate
+- dvclive/plots/sklearn/prc/class_0.json:
+    template: simple
+    x: recall
+    y: precision
+    title: Precision-Recall Curve
+    x_label: Recall
+    y_label: Precision
+- dvclive/plots/sklearn/confusion_matrix.json:
+    template: confusion
+    x: actual
+    y: predicted
+    title: Confusion Matrix
+    x_label: True Label
+    y_label: Predicted Label
